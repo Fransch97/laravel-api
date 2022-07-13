@@ -13,7 +13,7 @@ window.axios = require('axios');
 
 const app = new Vue({
     el: '#app',
-    require: h => h(App)
+    render: h => h(App)
 });
 
 

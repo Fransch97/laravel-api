@@ -1908,10 +1908,27 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "App",
+  data: function data() {
+    return {
+      url: "http://127.0.0.1:8000/api/posts",
+      postsData: []
+    };
+  },
+  methods: {
+    getApi: function getApi() {}
+  },
   mounted: function mounted() {
-    console.log("working");
+    var _this = this;
+
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(this.url).then(function (r) {
+      console.log(r.data);
+      _this.postsData = r.data;
+    });
   }
 });
 
@@ -1932,15 +1949,21 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _vm._m(0);
+  return _c("div", [_c("h1", [_vm._v("Posts")]), _vm._v(" "), _c("div", {
+    staticClass: "container"
+  }, _vm._l(_vm.postsData, function (post) {
+    return _c("div", {
+      key: post.id,
+      staticClass: "card"
+    }, [_c("h2", [_vm._v(_vm._s(post.title))]), _vm._v(" "), _vm._l(post.tags, function (tag) {
+      return _c("span", {
+        key: tag.id
+      }, [_vm._v("\n                " + _vm._s(tag.name) + "\n                ")]);
+    }), _vm._v(" "), _c("p", [_vm._v(_vm._s(post.content))])], 2);
+  }), 0)]);
 };
 
-var staticRenderFns = [function () {
-  var _vm = this,
-      _c = _vm._self._c;
-
-  return _c("div", [_c("h1", [_vm._v("hello moto")]), _vm._v("dsdsdsssss\n    ")]);
-}];
+var staticRenderFns = [];
 render._withStripped = true;
 
 
@@ -14262,7 +14285,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 var app = new Vue({
   el: '#app',
-  require: function require(h) {
+  render: function render(h) {
     return h(_App_vue__WEBPACK_IMPORTED_MODULE_0__["default"]);
   }
 });
