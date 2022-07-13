@@ -9,6 +9,10 @@
                 {{tag.name}}
                 </span>
                 <p>{{post.content}}</p>
+                <p>{{post.likes}}</p>
+                <span class="likes"
+                onclick="likes(post.id)"
+                >&#10084;</span>
             </div>
 
         </div>
@@ -24,23 +28,43 @@ export default {
     name: "App",
     data() {
         return {
-            url: "http://127.0.0.1:8000/api/posts",
+            urlGet: "http://127.0.0.1:8000/api/posts",
+
+            urlPut: "http://127.0.0.1:8000/api/posts/update",
+
+
             postsData : [],
         }
     },
     methods: {
         getApi(){
+            Axios.get(this.urlGet)
+            .then(r=>{
 
+                console.log(r.data)
+                this.postsData = r.data
+
+            })
+        },
+
+        like(id){
+
+            putParams = id
+
+            Axios.put(this.urlPut,{ "id ": putParams })
+            .then(r=>{
+
+                console.log(r.data)
+                this.postsData = r.data
+
+            })
+
+
+            this.getApi()
         }
     },
     mounted(){
-        Axios.get(this.url)
-        .then(r=>{
-
-            console.log(r.data)
-            this.postsData = r.data
-
-        })
+        this.getApi()
     }
 }
 </script>

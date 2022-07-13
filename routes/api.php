@@ -15,3 +15,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('posts', 'Api\PostsController@index');
+Route::put('posts/update/{id}','Api\PostsController@update');

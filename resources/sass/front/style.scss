@@ -1,16 +1,28 @@
 body{
-    background-color: red;
+    background-color: black;
+    color: white;
     text-align: center;
 }
 
 .container{
+    color: black;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-}
-.card{
-    margin: 20px 20px;
-    width: 200px;
-    padding: 20px;
-    background-color: white;
+    .card{
+        margin: 20px 20px;
+        width: 200px;
+        padding: 20px;
+        background-color: white;
+
+        .likes{
+
+            font-size: 30px;
+            color: red;
+            cursor: pointer;
+            &:hover{
+                font-size: 40px;
+            }
+        }
+    }
 }

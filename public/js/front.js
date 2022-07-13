@@ -1915,20 +1915,35 @@ __webpack_require__.r(__webpack_exports__);
   name: "App",
   data: function data() {
     return {
-      url: "http://127.0.0.1:8000/api/posts",
+      urlGet: "http://127.0.0.1:8000/api/posts",
+      urlPut: "http://127.0.0.1:8000/api/posts/update",
       postsData: []
     };
   },
   methods: {
-    getApi: function getApi() {}
+    getApi: function getApi() {
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(this.urlGet).then(function (r) {
+        console.log(r.data);
+        _this.postsData = r.data;
+      });
+    },
+    like: function like(id) {
+      var _this2 = this;
+
+      putParams = id;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.put(this.urlPut, {
+        "id": putParams
+      }).then(function (r) {
+        console.log(r.data);
+        _this2.postsData = r.data;
+      });
+      this.getApi();
+    }
   },
   mounted: function mounted() {
-    var _this = this;
-
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(this.url).then(function (r) {
-      console.log(r.data);
-      _this.postsData = r.data;
-    });
+    this.getApi();
   }
 });
 
@@ -1959,7 +1974,12 @@ var render = function render() {
       return _c("span", {
         key: tag.id
       }, [_vm._v("\n                " + _vm._s(tag.name) + "\n                ")]);
-    }), _vm._v(" "), _c("p", [_vm._v(_vm._s(post.content))])], 2);
+    }), _vm._v(" "), _c("p", [_vm._v(_vm._s(post.content))]), _vm._v(" "), _c("p", [_vm._v(_vm._s(post.likes))]), _vm._v(" "), _c("span", {
+      staticClass: "likes",
+      attrs: {
+        onclick: "likes(post.id)"
+      }
+    }, [_vm._v("❤")])], 2);
   }), 0)]);
 };
 
